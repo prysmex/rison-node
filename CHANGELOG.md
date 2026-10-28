@@ -1,5 +1,29 @@
 ### Changelog
 
+## prysmex-rison-node
+
+#### 3.0.0 (unreleased)
+
+First release of the fork `prysmex-rison-node`, based on rison-node
+2.1.1. TypeScript rewrite with ES module and CommonJS builds and type
+declarations, bug fixes, and a new test suite. The full list of behavior changes
+is in the README, under "Differences from rison-node". In short:
+
+- Number-like object keys are quoted unless they are canonical numbers, and
+  number keys keep their text when decoded (`'01'` no longer turns into `'1'`).
+- `(__proto__:...)` no longer replaces the prototype of the decoded object.
+- No console output on parse errors.
+- Every invalid input throws a `RisonError` (with `index` and `reason`) instead
+  of crashing with a `TypeError`/`RangeError` or returning `NaN`.
+- `encode` only encodes own enumerable keys, unwraps boxed primitives, and
+  throws a `TypeError` for non-encodable or circular values.
+- New camelCase names, `safeDecode` and types; the rison-node snake_case names
+  remain.
+
+## rison-node (upstream, by Joe Fleming and contributors)
+
+The entries below are rison-node's changelog, unchanged.
+
 #### [v2.1.1](https://github.com/w33ble/rison-node/compare/v2.1.0...v2.1.1) (4 June 2020)
 - fix: handle keys that start with numbers [`f0e10e3`](https://github.com/w33ble/rison-node/commit/f0e10e377bc328bfeb82e74c6498394612e6e4e6)
 

@@ -1,56 +1,109 @@
 {
-  "name": "rison-node",
-  "version": "2.1.1",
-  "main": "js/rison.js",
-  "scripts": {
-    "preversion": "npm run test",
-    "version": "npm-auto-version",
-    "test:only": "tape \"tests/*.js\"",
-    "test": "npm run lint && npm run test:only",
-    "lint": "eslint \"js/*.js\" \"tests/*.js\"",
-    "precommit": "lint-staged",
-    "prepush": "npm run test"
+  "name": "prysmex-rison-node",
+  "version": "3.0.0",
+  "description": "Rison: a compact, URI-friendly data serialization format (JSON for URLs). Typed ESM/CJS encoder and decoder.",
+  "keywords": [
+    "rison",
+    "o-rison",
+    "a-rison",
+    "url",
+    "uri",
+    "querystring",
+    "serialization",
+    "json"
+  ],
+  "homepage": "https://github.com/prysmex/rison-node#readme",
+  "bugs": {
+    "url": "https://github.com/prysmex/rison-node/issues"
   },
-  "author": "Joe Fleming (https://github.com/w33ble)",
-  "description": "data serialization format optimized for compactness in URIs",
-  "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/w33ble/rison-node.git"
+    "url": "git+https://github.com/prysmex/rison-node.git"
   },
-  "files": [
-    "js",
-    "LICENSE.md",
-    "README.md",
-    "AUTHORS.md",
-    "CHANGELOG.md"
+  "license": "Apache-2.0",
+  "author": "Joe Fleming (https://github.com/w33ble)",
+  "contributors": [
+    "Nanonid (https://github.com/Nanonid)",
+    "Justin Bradford (https://github.com/jabr)",
+    "Joe Fleming (https://github.com/w33ble)",
+    "Court Ewing (https://github.com/epixa)",
+    "Jonas Finnemann Jensen (https://github.com/jonasfj)",
+    "Sam Presnal (https://github.com/spresnal)",
+    "Casey Webb (https://github.com/caseyWebb)",
+    "fabio-looker (https://github.com/fabio-looker)",
+    "willetvary (https://github.com/willetvary)",
+    "Prysmex (https://github.com/prysmex) - maintainer of the prysmex-rison-node fork"
   ],
-  "lint-staged": {
-    "ignore": [
-      "package.json",
-      "js/rison.js"
-    ],
-    "linters": {
-      "*.{js,mjs}": [
-        "eslint --fix"
-      ],
-      "*.{js,mjs,json,css}": [
-        "prettier --write"
-      ]
-    }
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
   },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5"
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE.md",
+    "NOTICE",
+    "AUTHORS.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:package": "vitest run --config vitest.package.config.ts",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write . && eslint . --fix",
+    "typecheck": "tsc -p tsconfig.json && tsc -p test/tsconfig.json",
+    "check:package": "publint --strict && attw --pack .",
+    "prepack": "pnpm run build"
   },
   "devDependencies": {
-    "@w33ble/npm-auto-tools": "*",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.0.4",
-    "prettier": "^1.12.0",
-    "tape": "^4.2.2"
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.19.0",
+    "@vitest/coverage-v8": "3.2.7",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "fast-check": "^4.10.2",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "publint": "^0.3.25",
+    "rison-node-0.3": "npm:rison-node@0.3.1",
+    "rison-node-2": "npm:rison-node@2.1.1",
+    "tsup": "^9.0.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^6.4.5",
+    "vitest": "3.2.7"
+  },
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.4.5"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

@@ -1,0 +1,40 @@
+prysmex-rison-node
+==================
+
+This product is a modified fork of rison-node
+(https://github.com/w33ble/rison-node), maintained by Joe Fleming and the
+contributors listed in AUTHORS.md and published on npm as "rison-node".
+rison-node is itself the npm packaging of Rison
+(https://github.com/Nanonid/rison), a mirror of the original Rison page and
+implementation formerly published at http://mjtemplate.org/examples/rison.html.
+
+rison-node is licensed under the Apache License, Version 2.0 (LICENSE.md).
+This fork is distributed under the same license.
+
+Original attribution, as stated in rison-node's js/rison.js:
+
+  - The encoder ("stringifier") is based on http://json.org/json.js as of
+    2006-04-28 from json.org (Douglas Crockford's json.js), license
+    http://www.json.org/license.html, "hacked by nix for use in uris".
+  - The decoder ("parser") is based on Oliver Steele's OpenLaszlo JSON
+    (http://osteele.com/sources/openlaszlo/json), "Copyright 2006 Oliver
+    Steele. All rights reserved.", MIT License, "hacked by nix for use in
+    uris".
+
+The python/ directory of the source repository (not part of the npm package)
+is a mirror of python-rison by Stijn Debrouwere, MIT License,
+"Copyright (c) 2010 Oliver Steele, nix, Stijn Debrouwere" (python/LICENSE).
+
+Modifications made in this fork (Prysmex, 2026), per Section 4(b) of the
+Apache License, Version 2.0:
+
+  - js/rison.js was rewritten in TypeScript (src/encode.ts, src/decode.ts,
+    src/uri.ts, src/errors.ts, src/types.ts, src/index.ts); the files that
+    derive from js/rison.js keep its attribution comments and are marked as
+    modified.
+  - The package is published as ES module and CommonJS builds with TypeScript
+    declarations, instead of the UMD script js/rison.js.
+  - Bug fixes and behavior changes, listed in README.md ("Differences from
+    rison-node") and CHANGELOG.md (3.0.0).
+  - The tape tests were ported to vitest and extended; the tooling (build,
+    lint, CI) was replaced.

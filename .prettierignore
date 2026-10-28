@@ -1,0 +1,10 @@
+dist
+coverage
+node_modules
+pnpm-lock.yaml
+python
+CHANGELOG.md
+*.tgz
+LICENSE.md
+AUTHORS.md
+NOTICE
